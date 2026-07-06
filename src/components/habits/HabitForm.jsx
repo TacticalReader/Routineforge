@@ -8,7 +8,7 @@ function HabitForm({ onSubmit }) {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        if (!title.trim()) return
+        if (!title.trim() || !description.trim()) return
 
         setIsSubmitting(true)
         await onSubmit({ title: title.trim(), description: description.trim() })
@@ -32,9 +32,10 @@ function HabitForm({ onSubmit }) {
             />
             <input
                 type="text"
-                placeholder="Description (optional)"
+                placeholder="Description"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
+                required
                 style={{ padding: '0.6rem', border: '3px solid #111111', flex: '1 1 200px' }}
             />
             <button
