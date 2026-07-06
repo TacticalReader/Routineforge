@@ -10,26 +10,28 @@ const linkStyle = ({ isActive }) => ({
     textDecoration: isActive ? 'underline' : 'none',
 })
 
-function AppSidebar() {
+function AppSidebar({ isOpen, onClose }) {
     return (
-        <aside
-            style={{
-                width: '180px',
-                padding: '1.5rem 1rem',
-                borderRight: '3px solid #111111',
-            }}
-        >
-            <nav>
-                <NavLink to="/" end style={linkStyle}>
-                    <LayoutDashboard size={18} />
-                    Dashboard
-                </NavLink>
-                <NavLink to="/settings" style={linkStyle}>
-                    <Settings size={18} />
-                    Settings
-                </NavLink>
-            </nav>
-        </aside>
+        <>
+            {/* Dark overlay (mobile only, via CSS) */}
+            <div
+                className={`sidebar-overlay${isOpen ? ' open' : ''}`}
+                onClick={onClose}
+            />
+
+            <aside className={`app-sidebar${isOpen ? ' open' : ''}`}>
+                <nav>
+                    <NavLink to="/" end style={linkStyle} onClick={onClose}>
+                        <LayoutDashboard size={18} />
+                        Dashboard
+                    </NavLink>
+                    <NavLink to="/settings" style={linkStyle} onClick={onClose}>
+                        <Settings size={18} />
+                        Settings
+                    </NavLink>
+                </nav>
+            </aside>
+        </>
     )
 }
 

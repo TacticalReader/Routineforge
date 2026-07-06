@@ -15,8 +15,10 @@ function HabitCard({ habit, onDelete }) {
                 marginBottom: '1rem',
                 boxShadow: '4px 4px 0 #111111',
                 display: 'flex',
+                flexWrap: 'wrap',
                 justifyContent: 'space-between',
                 alignItems: 'center',
+                gap: '0.75rem',
             }}
         >
             <div>

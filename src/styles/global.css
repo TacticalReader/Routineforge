@@ -51,6 +51,45 @@ button:active {
     flex-direction: column;
 }
 
+/* ── Main content area (sidebar + page) ── */
+.app-body {
+    display: flex;
+    flex: 1;
+}
+
+.app-main {
+    flex: 1;
+    padding: 1.5rem;
+}
+
+/* ── Sidebar ── */
+.app-sidebar {
+    width: 180px;
+    padding: 1.5rem 1rem;
+    border-right: 3px solid #111111;
+    flex-shrink: 0;
+}
+
+/* ── Mobile hamburger button ── */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0.25rem;
+    cursor: pointer;
+}
+
+/* ── Header email (hidden on mobile) ── */
+.header-email {
+    font-size: 0.85rem;
+}
+
+/* ── Mobile sidebar overlay ── */
+.sidebar-overlay {
+    display: none;
+}
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -58,5 +97,81 @@ button:active {
 
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* ═══════════════════════════════════════════════ */
+/* ── MOBILE RESPONSIVE  (max-width: 768px) ──    */
+/* ═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* Show hamburger */
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Hide email on small screens */
+    .header-email {
+        display: none;
+    }
+
+    /* Sidebar becomes a slide-over drawer */
+    .app-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 220px;
+        z-index: 1000;
+        background: var(--color-bg);
+        border-right: 3px solid #111111;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        padding-top: 4.5rem;
+    }
+
+    .app-sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Dark overlay behind sidebar */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .sidebar-overlay.open {
+        display: block;
+    }
+
+    /* Main content takes full width */
+    .app-main {
+        padding: 1rem;
+    }
+
+    /* Reduce button shadow on mobile */
+    button {
+        box-shadow: 2px 2px 0 var(--color-ink);
+    }
+
+    button:active {
+        box-shadow: 1px 1px 0 var(--color-ink);
+    }
+}
+
+/* ═══════════════════════════════════════════════ */
+/* ── SMALL MOBILE (max-width: 480px) ──          */
+/* ═══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+    .app-main {
+        padding: 0.75rem;
+    }
+
+    h2 {
+        font-size: 1.15rem;
     }
 }

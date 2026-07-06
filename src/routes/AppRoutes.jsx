@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import DashboardPage from '../pages/DashboardPage'
 import { useAuthSession } from '../hooks/useAuthSession'
@@ -24,6 +25,7 @@ function SettingsPlaceholder() {
 
 function ProtectedLayout({ children }) {
     const { user, isLoading } = useAuthSession()
+    const [sidebarOpen, setSidebarOpen] = useState(false)
 
     if (isLoading) {
         return <p style={{ padding: '2rem' }}>Loading...</p>
@@ -35,10 +37,13 @@ function ProtectedLayout({ children }) {
 
     return (
         <div className="app-shell">
-            <AppHeader />
-            <div style={{ display: 'flex', flex: 1 }}>
-                <AppSidebar />
-                <main style={{ flex: 1, padding: '1.5rem' }}>{children}</main>
+            <AppHeader onMenuToggle={() => setSidebarOpen((prev) => !prev)} />
+            <div className="app-body">
+                <AppSidebar
+                    isOpen={sidebarOpen}
+                    onClose={() => setSidebarOpen(false)}
+                />
+                <main className="app-main">{children}</main>
             </div>
             <AppFooter />
         </div>
