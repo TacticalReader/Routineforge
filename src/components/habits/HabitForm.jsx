@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Plus } from 'lucide-react'
 
 function HabitForm({ onSubmit }) {
     const [title, setTitle] = useState('')
@@ -36,7 +37,16 @@ function HabitForm({ onSubmit }) {
                 onChange={(event) => setDescription(event.target.value)}
                 style={{ padding: '0.6rem', border: '3px solid #111111', flex: '1 1 200px' }}
             />
-            <button type="submit" disabled={isSubmitting}>
+            <button
+                type="submit"
+                disabled={isSubmitting}
+                style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                }}
+            >
+                <Plus size={16} />
                 {isSubmitting ? 'Adding...' : 'Add Habit'}
             </button>
         </form>

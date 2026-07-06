@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Trash2 } from 'lucide-react'
 import AppModal from '../common/AppModal'
 import AppButton from '../common/AppButton'
 
@@ -32,7 +33,7 @@ function HabitCard({ habit, onDelete }) {
                 )}
             </div>
 
-            <AppButton variant="danger" onClick={() => setIsConfirmOpen(true)}>
+            <AppButton variant="danger" icon={Trash2} onClick={() => setIsConfirmOpen(true)}>
                 Delete
             </AppButton>
 
@@ -47,6 +48,7 @@ function HabitCard({ habit, onDelete }) {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                     <AppButton
                         variant="danger"
+                        icon={Trash2}
                         onClick={() => {
                             onDelete(habit.id)
                             setIsConfirmOpen(false)
