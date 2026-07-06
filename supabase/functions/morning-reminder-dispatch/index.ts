@@ -29,7 +29,17 @@ async function sendReminderEmail(toEmail: string, habitTitles: string[]) {
     }
 }
 
-Deno.serve(async () => {
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
+
+Deno.serve(async (req) => {
+    // Handle CORS preflight requests
+    if (req.method === 'OPTIONS') {
+        return new Response('ok', { headers: corsHeaders })
+    }
+
     // Only remind users who actually have something to protect — no
     // point nagging someone with zero active streaks.
     const { data: streakRows, error } = await supabase
@@ -38,7 +48,10 @@ Deno.serve(async () => {
         .gt('current_streak', 0)
 
     if (error) {
-        return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+        return new Response(JSON.stringify({ error: error.message }), {
+            status: 500,
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        })
     }
 
     const habitTitlesByUser = new Map<string, string[]>()
@@ -60,6 +73,6 @@ Deno.serve(async () => {
     }
 
     return new Response(JSON.stringify({ remindersSent: sentCount }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })
 })
