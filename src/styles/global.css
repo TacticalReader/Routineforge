@@ -1,0 +1,62 @@
+:root {
+    --color-bg: #FAFAF7;
+    --color-ink: #111111;
+    --color-accent: #D6F84C;
+    --color-border: #111111;
+    --border-width: 3px;
+    --shadow-offset: 4px;
+    --font-base: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-base);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: var(--border-width) solid var(--color-border);
+    background-color: var(--color-accent);
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-ink);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
