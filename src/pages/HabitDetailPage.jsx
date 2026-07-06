@@ -72,7 +72,7 @@ function HabitDetailPage() {
             {completionDates.length === 0 ? (
                 <p>
                     No completions recorded yet — this fills in once the nightly cron
-                    (Phase 8) finalizes each day.
+                    finalizes each day.
                 </p>
             ) : (
                 <ul>

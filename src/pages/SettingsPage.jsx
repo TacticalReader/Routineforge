@@ -55,8 +55,8 @@ function SettingsPage() {
             <section>
                 <h3 style={{ marginBottom: '0.5rem' }}>Test Reminder Cron</h3>
                 <p style={{ marginBottom: '0.5rem', fontSize: '0.9rem' }}>
-                    Manually triggers the morning-reminder-dispatch Edge Function from
-                    Phase 8, without waiting for its 8 AM schedule.
+                    Manually triggers the morning-reminder-dispatch Edge Function
+                    without waiting for its 8 AM schedule.
                 </p>
                 <AppButton icon={Send} onClick={handleSendTest}>
                     Send Test Reminder
