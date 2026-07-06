@@ -14,9 +14,8 @@ async function sendReminderEmail(toEmail: string, habitTitles: string[]) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            // Replace yourdomain.com with your Resend-verified domain
-            // before deploying — Resend rejects unverified sender addresses.
-            from: 'RoutineForge <reminders@yourdomain.com>',
+            // Use Resend's free sandbox testing address
+            from: 'RoutineForge <onboarding@resend.dev>',
             to: toEmail,
             subject: "Don't break your streak today",
             html: `<p>You have a live streak on: ${habitTitles.join(', ')}. Keep it going today!</p>`,
