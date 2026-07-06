@@ -1,7 +1,10 @@
 import { NavLink } from 'react-router-dom'
+import { LayoutDashboard, Settings } from 'lucide-react'
 
 const linkStyle = ({ isActive }) => ({
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
     padding: '0.6rem 0',
     fontWeight: isActive ? 700 : 500,
     textDecoration: isActive ? 'underline' : 'none',
@@ -18,9 +21,11 @@ function AppSidebar() {
         >
             <nav>
                 <NavLink to="/" end style={linkStyle}>
+                    <LayoutDashboard size={18} />
                     Dashboard
                 </NavLink>
                 <NavLink to="/settings" style={linkStyle}>
+                    <Settings size={18} />
                     Settings
                 </NavLink>
             </nav>
