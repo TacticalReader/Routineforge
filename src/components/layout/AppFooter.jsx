@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Code2, Star, Heart, User } from 'lucide-react'
+import { Code2, Star, Heart, User, ExternalLink, Zap } from 'lucide-react'
 
 const REPO_OWNER = 'TacticalReader'
 const REPO_NAME = 'Routineforge'
@@ -50,15 +50,122 @@ function AppFooter() {
     return (
         <footer
             style={{
-                padding: '1.25rem 1.5rem',
-                borderTop: '3px solid #111111',
-                background: '#111111',
-                color: '#e0e0e0',
-                fontSize: '0.82rem',
-                lineHeight: 1.7,
+                padding: '2rem 2.5rem',
+                borderTop: '3px solid var(--color-accent)',
+                background: '#0a0a0a',
+                color: '#c0c0c0',
+                fontSize: '0.84rem',
+                lineHeight: 1.8,
             }}
         >
-            {/* ── Top row: branding + GitHub link ── */}
+            {/* ── Main grid: 3 columns on desktop, stacks on mobile ── */}
+            <div
+                style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                    gap: '2rem',
+                    maxWidth: '1100px',
+                    margin: '0 auto',
+                }}
+            >
+                {/* Column 1: Branding */}
+                <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                        <Code2 size={20} color="#D6F84C" />
+                        <span style={{ fontWeight: 700, fontSize: '1.1rem', color: '#ffffff', letterSpacing: '-0.02em' }}>
+                            RoutineForge
+                        </span>
+                    </div>
+                    <p style={{ color: '#888', fontSize: '0.82rem', maxWidth: '260px' }}>
+                        A habit tracker built to master Redis caching and cron job scheduling in a real-world project.
+                    </p>
+                </div>
+
+                {/* Column 2: Built With */}
+                <div>
+                    <h4 style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                        <Zap size={14} color="#D6F84C" />
+                        Built With
+                    </h4>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                        {['React', 'Vite', 'Supabase', 'Upstash Redis', 'Resend'].map((tech) => (
+                            <span
+                                key={tech}
+                                style={{
+                                    display: 'inline-block',
+                                    padding: '0.2rem 0.6rem',
+                                    background: '#1a1a1a',
+                                    border: '1px solid #2a2a2a',
+                                    borderRadius: '4px',
+                                    fontSize: '0.78rem',
+                                    color: '#aaa',
+                                }}
+                            >
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Column 3: Connect */}
+                <div>
+                    <h4 style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                        <ExternalLink size={14} color="#D6F84C" />
+                        Connect
+                    </h4>
+                    <a
+                        href={REPO_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.45rem',
+                            color: '#e0e0e0',
+                            textDecoration: 'none',
+                            background: '#1a1a1a',
+                            border: '2px solid #2a2a2a',
+                            borderRadius: '8px',
+                            padding: '0.5rem 0.9rem',
+                            transition: 'border-color 0.2s ease, background 0.2s ease, transform 0.15s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.borderColor = '#D6F84C'
+                            e.currentTarget.style.background = '#1e1e1e'
+                            e.currentTarget.style.transform = 'translateY(-1px)'
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.borderColor = '#2a2a2a'
+                            e.currentTarget.style.background = '#1a1a1a'
+                            e.currentTarget.style.transform = 'none'
+                        }}
+                    >
+                        <GithubIcon size={16} />
+                        <span style={{ fontWeight: 600, fontSize: '0.84rem' }}>TacticalReader</span>
+                        {starCount !== null && (
+                            <>
+                                <span style={{ color: '#444', margin: '0 0.1rem' }}>·</span>
+                                <Star size={13} color="#f0c14b" fill="#f0c14b" />
+                                <span style={{ fontWeight: 700, color: '#f0c14b', fontSize: '0.82rem' }}>
+                                    {starCount}
+                                </span>
+                            </>
+                        )}
+                    </a>
+                </div>
+            </div>
+
+            {/* ── Divider ── */}
+            <hr
+                style={{
+                    border: 'none',
+                    borderTop: '1px solid #1e1e1e',
+                    margin: '1.5rem auto 1rem',
+                    maxWidth: '1100px',
+                }}
+            />
+
+            {/* ── Bottom bar: credits + star CTA ── */}
             <div
                 style={{
                     display: 'flex',
@@ -66,85 +173,21 @@ function AppFooter() {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     gap: '0.75rem',
-                }}
-            >
-                {/* Branding */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                    <Code2 size={16} color="#D6F84C" />
-                    <span style={{ fontWeight: 700, color: '#ffffff' }}>RoutineForge</span>
-                    <span style={{ color: '#999' }}>— built to learn Redis &amp; cron jobs.</span>
-                </div>
-
-                {/* GitHub link + star count */}
-                <a
-                    href={REPO_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        color: '#e0e0e0',
-                        textDecoration: 'none',
-                        background: '#222',
-                        border: '2px solid #333',
-                        borderRadius: '6px',
-                        padding: '0.3rem 0.7rem',
-                        transition: 'border-color 0.2s ease, background 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = '#D6F84C'
-                        e.currentTarget.style.background = '#2a2a2a'
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = '#333'
-                        e.currentTarget.style.background = '#222'
-                    }}
-                >
-                    <GithubIcon size={15} />
-                    <span style={{ fontWeight: 600 }}>TacticalReader</span>
-                    {starCount !== null && (
-                        <>
-                            <span style={{ color: '#555', margin: '0 0.15rem' }}>·</span>
-                            <Star size={13} color="#f0c14b" fill="#f0c14b" />
-                            <span style={{ fontWeight: 700, color: '#f0c14b' }}>
-                                {starCount}
-                            </span>
-                        </>
-                    )}
-                </a>
-            </div>
-
-            {/* ── Divider ── */}
-            <hr
-                style={{
-                    border: 'none',
-                    borderTop: '1px solid #2a2a2a',
-                    margin: '0.7rem 0',
-                }}
-            />
-
-            {/* ── Bottom row: credits + star CTA ── */}
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: '0.5rem',
                     fontSize: '0.78rem',
-                    color: '#999',
+                    color: '#666',
+                    maxWidth: '1100px',
+                    margin: '0 auto',
                 }}
             >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                     <User size={13} color="#D6F84C" />
-                    <span>Designed &amp; programmed by</span>
-                    <span style={{ fontWeight: 700, color: '#ffffff' }}>TanmaySrivastava</span>
+                    <span>Designed &amp; built by</span>
+                    <span style={{ fontWeight: 700, color: '#d0d0d0' }}>TanmaySrivastava</span>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <span>If you liked this project, give it a</span>
-                    <Heart size={13} color="#FF6B6B" fill="#FF6B6B" />
+                    <span>If you liked this, give it a</span>
+                    <Heart size={13} color="#FF6B6B" fill="#FF6B6B" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
                     <a
                         href={REPO_URL}
                         target="_blank"
@@ -153,8 +196,12 @@ function AppFooter() {
                             fontWeight: 700,
                             color: '#D6F84C',
                             textDecoration: 'underline',
-                            textUnderlineOffset: '2px',
+                            textUnderlineOffset: '3px',
+                            textDecorationThickness: '2px',
+                            transition: 'color 0.2s ease',
                         }}
+                        onMouseEnter={(e) => { e.currentTarget.style.color = '#e8ff7a' }}
+                        onMouseLeave={(e) => { e.currentTarget.style.color = '#D6F84C' }}
                     >
                         star on GitHub
                     </a>
