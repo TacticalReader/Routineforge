@@ -224,23 +224,6 @@ select * from cron.job_run_details order by start_time desc limit 10;
 
 ---
 
-## 🗺️ Built in 10 Phases
-
-This project was deliberately built in phases, saving Redis and cron for
-last so the "why" behind each was clear before writing the code:
-
-1. Project scaffolding & config
-2. Supabase backend setup
-3. Auth flow
-4. Routing & layout shell
-5. Core habit CRUD (Supabase only, no caching)
-6. 🔴 Redis integration (caching layer)
-7. Streak logic & detail page
-8. ⏰ Cron Edge Functions
-9. Settings & shared UI polish
-10. Deployment & project log
-
----
 
 ## 📄 License
 
